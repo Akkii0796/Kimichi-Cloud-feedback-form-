@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Kimchi Cloud | Quick Feedback</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --kimichi-red: #C41230;
+            --noodle-yellow: #FFC107;
+            --dark-bg: #0D0D0D;
+            --card-bg: #1A1A1A;
+            --text-white: #FFFFFF;
+            --marathi-text: #FFFFFF;
+        }
+
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background-color: var(--dark-bg);
+            color: var(--text-white);
+            margin: 0; padding: 0;
+            display: flex; flex-direction: column; align-items: center;
+            min-height: 100vh; justify-content: center; overflow: hidden;
+        }
+
+        .container {
+            width: 94%; max-width: 380px;
+            background: var(--card-bg);
+            padding: 15px 15px 25px;
+            border-radius: 30px; border: 1px solid #444;
+            box-shadow: 0 25px 60px rgba(0,0,0,1);
+            position: relative;
+        }
+
+        .logo-container {
+            text-align: center;
+            margin-top: -65px;
+            margin-bottom: 10px;
+        }
+        .logo-circle {
+            width: 100px; height: 100px; background: var(--card-bg);
+            border-radius: 50%; padding: 4px; display: inline-block;
+            border: 3px solid var(--kimichi-red);
+            box-shadow: 0 0 25px rgba(196, 18, 48, 0.7);
+            overflow: hidden;
+        }
+        .logo-circle img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
+
+        .brand-name { 
+            font-size: 1.4rem; font-weight: 900; color: var(--text-white);
+            text-align: center; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 15px;
+        }
+
+        h2 { font-size: 0.8rem; color: var(--noodle-yellow); text-transform: uppercase; margin: 18px 0 10px; letter-spacing: 0.5px; }
+        h2 span { 
+            font-size: 1.15rem; color: var(--marathi-text); 
+            display: block; font-weight: bold; margin-top: 4px;
+        }
+
+        .emoji-row { display: flex; justify-content: space-between; padding: 10px 0; }
+        .emoji-btn { font-size: 2.6rem; filter: grayscale(1); transition: 0.3s; cursor: pointer; opacity: 0.25; }
+        .emoji-btn.selected { filter: grayscale(0); transform: scale(1.4); opacity: 1; }
+
+        .chip-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+        .chip {
+            background: #2A2A2A; border: 1px solid #444;
+            padding: 12px 2px; border-radius: 14px;
+            text-align: center; font-size: 0.7rem; font-weight: 700; color: #BBB;
+            line-height: 1.3; transition: 0.2s;
+        }
+        .chip span { display: block; font-size: 0.9rem; font-weight: bold; color: #FFFFFF; margin-top: 4px; }
+        .chip.active { background: var(--kimichi-red); border-color: var(--noodle-yellow); }
+
+        #dumplingbox { 
+            margin-top: 15px; padding: 15px; background: rgba(196, 18, 48, 0.2); 
+            border-radius: 20px; display: none; border: 2px dashed var(--kimichi-red);
+            animation: slideIn 0.3s ease-out;
+        }
+        @keyframes slideIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+
+        .dumpling-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; }
+        .dumpling-grid .chip { padding: 8px 1px; font-size: 0.6rem; }
+        .dumpling-grid .chip span { font-size: 0.7rem; }
+
+        .feedback-input {
+            width: 100%; background: #2A2A2A; border: 1px solid #444;
+            color: white; padding: 15px; border-radius: 15px;
+            box-sizing: border-box; font-size: 1rem; outline: none; margin-top: 5px;
+        }
+
+        .submit-btn {
+            width: 100%; background: var(--kimichi-red); color: white;
+            border: none; padding: 18px; border-radius: 18px;
+            font-weight: 900; margin-top: 25px; font-size: 1.25rem;
+            box-shadow: 0 8px 20px rgba(196, 18, 48, 0.6);
+        }
+
+        #successState { display: none; text-align: center; padding: 40px 0; }
+        .success-icon { font-size: 5rem; color: var(--noodle-yellow); margin-bottom: 20px; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="logo-container">
+        <div class="logo-circle">
+            <img src="https://lh3.googleusercontent.com/d/1idHxA-gOL06wplC1cyH961xIPn-u2tm8" alt="Kimchi Cloud">
+        </div>
+    </div>
+
+    <div id="formContent">
+        <div class="brand-name">Kimchi Cloud</div>
+
+        <h2>Food & Taste / <span>अनुभव कसा होता?</span></h2>
+        <div class="emoji-row">
+            <span class="emoji-btn" onclick="setRating(this, 1)">😡</span>
+            <span class="emoji-btn" onclick="setRating(this, 2)">😐</span>
+            <span class="emoji-btn" onclick="setRating(this, 3)">🙂</span>
+            <span class="emoji-btn" onclick="setRating(this, 4)">😊</span>
+            <span class="emoji-btn" onclick="setRating(this, 5)">🤩</span>
+        </div>
+
+        <h2>What did you eat? / <span>तुम्ही काय खाल्ले?</span></h2>
+        <div class="chip-grid">
+            <div class="chip" data-type="main" onclick="toggleChip(this, 'Dumplings')">Dumplings<span>मोमोज</span></div>
+            <div class="chip" data-type="main" onclick="toggleChip(this, 'Thukpa')">Thukpa<span>थुकपा</span></div>
+            <div class="chip" data-type="main" onclick="toggleChip(this, 'Fries')">Fries<span>फ्राईज</span></div>
+        </div>
+
+        <div id="dumplingbox">
+            <p style="font-size: 0.8rem; color: var(--noodle-yellow); text-align: center; margin-bottom: 10px; font-weight: bold;">Which style? / कोणता प्रकार?</p>
+            <div class="dumpling-grid">
+                <div class="chip" data-type="sub" onclick="toggleChip(this, 'Steam')">Steam<span>स्टीम</span></div>
+                <div class="chip" data-type="sub" onclick="toggleChip(this, 'Jhol')">Jhol<span>झोल</span></div>
+                <div class="chip" data-type="sub" onclick="toggleChip(this, 'Kurkure')">Kurkure<span>कुरकुरे</span></div>
+                <div class="chip" data-type="sub" onclick="toggleChip(this, 'PeriPeri')">Peri-P<span>पेरी</span></div>
+                <div class="chip" data-type="sub" onclick="toggleChip(this, 'Schezwan')">Schez<span>शेजवान</span></div>
+                <div class="chip" data-type="sub" onclick="toggleChip(this, 'Malai')">Malai<span>मलाई</span></div>
+                <div class="chip" data-type="sub" onclick="toggleChip(this, 'Cheese')">Cheese<span>चीझ</span></div>
+                <div class="chip" data-type="sub" onclick="toggleChip(this, 'Special')">Special<span>स्पेशल</span></div>
+            </div>
+        </div>
+
+        <h2>Suggestions / <span>काही सुधारणा?</span></h2>
+        <input type="text" id="suggestions" class="feedback-input" placeholder="सुधारणा? (Optional)">
+
+        <button id="submitBtn" class="submit-btn" onclick="handleForm()">SUBMIT / पाठवा</button>
+    </div>
+
+    <div id="successState">
+        <div class="success-icon"><i class="fas fa-check-circle"></i></div>
+        <h2 style="font-size: 1.8rem; margin: 0;">Dhanyawad!</h2>
+        <h2 style="font-size: 1.5rem; color: var(--noodle-yellow); margin-top: 5px;">धन्यवाद!</h2>
+        <p style="color: #ccc; font-size: 1.1rem; margin-top: 25px;">Your feedback helps us grow.<br>तुमची प्रतिक्रिया आम्हाला मिळाली.</p>
+    </div>
+</div>
+
+<script>
+    let currentRating = 0;
+    const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzSX9Jw0SVzXzaBa3fiO2S6ztdyzvcvoDyksy9abeThDetmpW4qSIE1Et2jOclY68M0/exec"; 
+    
+    // UPDATED: Most reliable Google Review link format
+    const GOOGLE_REVIEW_URL = "https://search.google.com/local/writereview?placeid=ChIJz5u4c3HV0jsRhC7ZVhO4ID8";
+
+    function setRating(el, val) {
+        document.querySelectorAll('.emoji-btn').forEach(b => b.classList.remove('selected'));
+        el.classList.add('selected');
+        currentRating = val;
+    }
+
+    function toggleChip(el, name) {
+        el.classList.toggle('active');
+        if(name === 'Dumplings') {
+            document.getElementById('dumplingbox').style.display = el.classList.contains('active') ? 'block' : 'none';
+        }
+    }
+
+    async function handleForm() {
+        if(currentRating === 0) { alert("कृपया एक इमोजी निवडा!"); return; }
+        
+        const mainItems = Array.from(document.querySelectorAll('.chip[data-type="main"].active')).map(c => c.firstChild.textContent);
+        const subItems = Array.from(document.querySelectorAll('.chip[data-type="sub"].active')).map(c => c.firstChild.textContent);
+        const suggestions = document.getElementById('suggestions').value;
+
+        const submitBtn = document.getElementById('submitBtn');
+        submitBtn.disabled = true;
+        submitBtn.innerText = "पाठवत आहे...";
+
+        try {
+            await fetch(GOOGLE_SCRIPT_URL, {
+                method: 'POST',
+                mode: 'no-cors',
+                body: JSON.stringify({
+                    rating: currentRating,
+                    items: mainItems.join(", "),
+                    dumplings: subItems.join(", "),
+                    feedback: suggestions
+                })
+            });
+        } catch (e) { console.error(e); }
+
+        if(currentRating >= 4) {
+            const leaveReview = confirm("धन्यवाद! तुम्ही तुमची प्रतिक्रिया गुगलवर शेअर करू इच्छिता का?");
+            if(leaveReview) {
+                window.location.href = GOOGLE_REVIEW_URL;
+                return;
+            }
+        }
+
+        document.getElementById('formContent').style.display = 'none';
+        document.getElementById('successState').style.display = 'block';
+    }
+</script>
+
+</body>
+</html>
