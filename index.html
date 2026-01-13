@@ -2,21 +2,18 @@
 <html lang="mr">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Kimchi Cloud - Feedback</title>
 
   <style>
     :root{
-      --bg1:#dc2626;
-      --bg2:#7f1d1d;
-
+      --page:#f8fafc;
       --card:#ffffff;
       --text:#0f172a;
-      --muted:#64748b;
+      --muted:#475569;
 
       --red:#dc2626;
       --red2:#991b1b;
-
       --ring: rgba(220,38,38,0.18);
 
       --radius-xl:20px;
@@ -24,21 +21,23 @@
       --radius-md:14px;
       --radius-sm:12px;
 
-      --shadow-1: 0 6px 18px rgba(0,0,0,0.10);
-      --shadow-2: 0 12px 28px rgba(0,0,0,0.14);
-      --shadow-press: 0 6px 16px rgba(0,0,0,0.12);
+      --shadow-1: 0 10px 26px rgba(2,6,23,0.10);
+      --shadow-2: 0 18px 55px rgba(2,6,23,0.16);
+      --shadow-press: 0 8px 18px rgba(2,6,23,0.14);
 
-      --border: rgba(2,6,23,0.08);
-      --border-strong: rgba(2,6,23,0.12);
+      --border: rgba(2,6,23,0.10);
+      --border-strong: rgba(2,6,23,0.14);
     }
 
-    * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color: transparent; }
+    *{ margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color: transparent; }
     body{
       font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
-      background: radial-gradient(1200px 600px at 20% 10%, rgba(255,255,255,0.12), transparent 40%),
-                  linear-gradient(135deg, var(--bg1) 0%, var(--bg2) 100%);
+      background:
+        radial-gradient(1000px 500px at 20% 0%, rgba(220,38,38,0.08), transparent 55%),
+        radial-gradient(900px 500px at 90% 10%, rgba(2,6,23,0.04), transparent 55%),
+        var(--page);
       min-height:100vh;
-      padding:12px;
+      padding: 12px;
       overflow-x:hidden;
       color: var(--text);
     }
@@ -49,13 +48,14 @@
       background: var(--card);
       border-radius: var(--radius-xl);
       overflow:hidden;
-      box-shadow: 0 18px 60px rgba(0,0,0,0.28);
-      border: 1px solid rgba(255,255,255,0.08);
+      box-shadow: var(--shadow-2);
+      border: 1px solid rgba(2,6,23,0.06);
     }
 
     .header{
-      background: radial-gradient(900px 340px at 20% 0%, rgba(255,255,255,0.16), transparent 45%),
-                  linear-gradient(135deg, var(--red) 0%, var(--red2) 100%);
+      background:
+        radial-gradient(900px 340px at 20% 0%, rgba(255,255,255,0.18), transparent 45%),
+        linear-gradient(135deg, var(--red) 0%, var(--red2) 100%);
       padding: 18px 16px 14px;
       text-align:center;
     }
@@ -66,7 +66,7 @@
       background: rgba(255,255,255,0.95);
       border-radius: 14px;
       padding: 8px;
-      box-shadow: 0 10px 26px rgba(0,0,0,0.22);
+      box-shadow: 0 12px 26px rgba(0,0,0,0.20);
       border: 1px solid rgba(255,255,255,0.55);
     }
     .logo img{ width:100%; height:100%; object-fit:contain; }
@@ -80,30 +80,38 @@
     }
     .header-subtitle{
       color: rgba(255,255,255,0.92);
-      font-size: 12px;
+      font-size: 13px;
       line-height: 1.35;
     }
 
-    .content{
-      padding: 16px 14px 18px;
-    }
+    .content{ padding: 16px 14px 12px; }
 
     .section{
       margin-bottom: 16px;
       opacity:0;
       transform: translateY(8px);
-      animation: fadeInUp 0.32s ease forwards;
+      animation: fadeInUp 0.28s ease forwards;
     }
     @keyframes fadeInUp { to{ opacity:1; transform: translateY(0); } }
 
     .section-title{
       font-size: 15px;
-      font-weight: 900;
+      font-weight: 950;
       color: var(--text);
-      margin-bottom: 2px;
+      margin-bottom: 3px;
+      display:flex;
+      align-items:baseline;
+      gap: 8px;
+      flex-wrap:wrap;
+    }
+    .req-star{
+      color: var(--red);
+      font-weight: 1000;
+      font-size: 16px;
+      line-height: 1;
     }
     .section-subtitle{
-      font-size: 12px;
+      font-size: 13px;
       color: var(--muted);
       margin-bottom: 10px;
       line-height: 1.35;
@@ -113,14 +121,28 @@
       display:inline-flex;
       align-items:center;
       gap:6px;
-      margin-top: 8px;
       font-size: 11px;
-      font-weight: 800;
+      font-weight: 900;
       color: #7f1d1d;
       background: #fee2e2;
       border: 1px solid #fecaca;
       padding: 4px 10px;
       border-radius: 999px;
+    }
+
+    .panel{
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border);
+      background:
+        radial-gradient(600px 160px at 20% 0%, rgba(2,6,23,0.03), transparent 55%),
+        linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+      box-shadow: var(--shadow-1);
+      padding: 12px 10px;
+    }
+
+    .panel.error{
+      border-color: rgba(220,38,38,0.45);
+      box-shadow: 0 0 0 4px var(--ring), var(--shadow-1);
     }
 
     .error-banner{
@@ -131,22 +153,16 @@
       color: #881337;
       padding: 10px 12px;
       border-radius: var(--radius-sm);
-      font-size: 12px;
+      font-size: 13px;
       line-height: 1.4;
       box-shadow: var(--shadow-1);
     }
     .error-banner.show{ display:block; }
 
-    button{
-      font-family: inherit;
-      border: none;
-      background: none;
-      padding: 0;
-      color: inherit;
-    }
+    button{ font-family: inherit; border:none; background:none; padding:0; color:inherit; }
     button:focus-visible{
-      outline: none;
-      box-shadow: 0 0 0 4px rgba(37,99,235,0.18);
+      outline:none;
+      box-shadow: 0 0 0 4px var(--ring);
       border-radius: 12px;
     }
 
@@ -155,17 +171,9 @@
       display:flex;
       justify-content: space-between;
       gap: 6px;
-      padding: 12px 10px;
-      border-radius: var(--radius-lg);
-      background:
-        radial-gradient(600px 160px at 20% 0%, rgba(220,38,38,0.10), transparent 55%),
-        linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
-      border: 1px solid var(--border);
-      box-shadow: var(--shadow-1);
     }
 
     .emoji-wrapper{ flex:1; display:flex; flex-direction:column; align-items:center; gap: 6px; }
-
     .emoji-btn{
       width: 56px;
       height: 56px;
@@ -175,25 +183,21 @@
       cursor:pointer;
       transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease, border 0.2s ease;
       border: 1px solid transparent;
-      background: rgba(2,6,23,0.02);
+      background: rgba(2,6,23,0.03);
     }
     .emoji-btn:active{ transform: translateY(1px) scale(0.98); }
     .emoji-btn span{ font-size: 34px; filter: grayscale(1); opacity: 0.45; transition: 0.22s ease; }
 
     .emoji-wrapper.active-wrapper .emoji-btn{
       background: rgba(220,38,38,0.10);
-      border: 1px solid rgba(220,38,38,0.24);
+      border: 1px solid rgba(220,38,38,0.28);
       box-shadow: 0 10px 22px rgba(220,38,38,0.16);
       transform: translateY(-1px);
     }
-    .emoji-wrapper.active-wrapper .emoji-btn span{
-      filter: grayscale(0);
-      opacity: 1;
-      transform: scale(1.08);
-    }
+    .emoji-wrapper.active-wrapper .emoji-btn span{ filter: grayscale(0); opacity: 1; transform: scale(1.08); }
 
     .emoji-label{
-      font-size: 10px;
+      font-size: 11px;
       font-weight: 900;
       color: #94a3b8;
       text-align:center;
@@ -214,12 +218,10 @@
       padding: 14px 10px;
       border-radius: var(--radius-md);
       border: 1px solid var(--border);
-      background:
-        radial-gradient(420px 160px at 20% 0%, rgba(2,6,23,0.04), transparent 60%),
-        linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
-      box-shadow: var(--shadow-1);
+      background: rgba(255,255,255,0.92);
+      box-shadow: 0 8px 18px rgba(0,0,0,0.06);
       cursor:pointer;
-      transition: transform 0.18s ease, box-shadow 0.18s ease, border 0.18s ease;
+      transition: transform 0.18s ease, box-shadow 0.18s ease, border 0.18s ease, background 0.18s ease;
       text-align:center;
       user-select:none;
     }
@@ -227,38 +229,35 @@
 
     .order-icon{ font-size: 34px; margin-bottom: 6px; filter: drop-shadow(0 6px 10px rgba(0,0,0,0.12)); }
     .order-text{ font-size: 14px; font-weight: 1000; color: var(--text); margin-bottom: 2px; }
-    .order-subtext{ font-size: 11px; color: var(--muted); font-weight: 700; }
+    .order-subtext{ font-size: 12px; color: var(--muted); font-weight: 800; }
 
     .order-card.selected{
       border: 1px solid rgba(220,38,38,0.35);
-      box-shadow: 0 14px 28px rgba(220,38,38,0.18);
+      box-shadow: 0 14px 28px rgba(220,38,38,0.16);
       transform: translateY(-1px);
+      background: rgba(220,38,38,0.06);
     }
-    .order-card.selected::before{
-      content:'';
-      position:absolute;
-      inset:0;
-      border-radius: inherit;
-      background: radial-gradient(500px 220px at 20% 0%, rgba(255,255,255,0.14), transparent 55%),
-                  linear-gradient(135deg, rgba(220,38,38,0.95) 0%, rgba(153,27,27,0.95) 100%);
-      z-index:0;
-    }
-    .order-card.selected > *{ position:relative; z-index:1; }
-    .order-card.selected .order-text,
-    .order-card.selected .order-subtext{ color:#fff; }
 
-    /* Other spans full width */
     .order-card[data-order="other"]{ grid-column: 1 / -1; }
+
+    .field-label{
+      display:block;
+      font-size: 12px;
+      font-weight: 900;
+      color: var(--muted);
+      margin: 10px 2px 6px;
+    }
 
     .other-input-wrap{ display:none; margin-top: 10px; }
     .other-input-wrap.show{ display:block; }
+
     .text-input{
       width:100%;
       padding: 12px 12px;
       border-radius: var(--radius-sm);
       border: 1px solid var(--border-strong);
       background: #f8fafc;
-      font-size: 13px;
+      font-size: 14px;
       font-weight: 700;
       transition: box-shadow 0.2s ease, border 0.2s ease, background 0.2s ease;
     }
@@ -280,70 +279,71 @@
     .label-strong{
       font-size: 13px;
       font-weight: 1000;
-      color: #0f172a;
-      margin-bottom: 8px;
+      color: var(--text);
+      margin: 12px 2px 8px;
       letter-spacing: 0.1px;
+      display:flex;
+      align-items:baseline;
+      gap: 8px;
+      flex-wrap:wrap;
     }
-    .label-note{ font-weight: 800; color: #64748b; }
+    .label-note{
+      font-size: 12px;
+      font-weight: 800;
+      color: var(--muted);
+    }
 
-    /* Filling */
+    /* Filling + Chips (neutral, brand accent only) */
     .variant-grid{
       display:grid;
       grid-template-columns: repeat(2,1fr);
       gap: 8px;
       padding: 10px;
       border-radius: var(--radius-md);
-      border: 1px solid rgba(34,197,94,0.22);
-      background:
-        radial-gradient(520px 180px at 20% 0%, rgba(34,197,94,0.10), transparent 55%),
-        linear-gradient(180deg, #ffffff 0%, #f0fdf4 100%);
-      box-shadow: var(--shadow-1);
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.80);
     }
     .variant-btn{
       padding: 10px 8px;
       border-radius: 12px;
-      border: 1px solid rgba(34,197,94,0.25);
+      border: 1px solid var(--border);
       background: rgba(255,255,255,0.92);
       box-shadow: 0 8px 18px rgba(0,0,0,0.06);
       cursor:pointer;
       transition: transform 0.18s ease, box-shadow 0.18s ease, border 0.18s ease, background 0.18s ease;
       font-size: 12px;
       font-weight: 950;
-      color: #14532d;
+      color: var(--text);
       text-align:center;
       user-select:none;
     }
     .variant-btn:active{ transform: translateY(1px); }
     .variant-btn.selected{
-      border: 1px solid rgba(34,197,94,0.55);
-      background: linear-gradient(135deg, rgba(34,197,94,0.18) 0%, rgba(34,197,94,0.10) 100%);
-      box-shadow: 0 14px 26px rgba(34,197,94,0.16);
+      border: 1px solid rgba(220,38,38,0.38);
+      background: linear-gradient(135deg, rgba(220,38,38,0.14) 0%, rgba(220,38,38,0.06) 100%);
+      box-shadow: 0 16px 28px rgba(220,38,38,0.14);
     }
 
-    /* Chips */
     .chip-grid{
       display:flex;
       flex-wrap:wrap;
       gap: 8px;
       padding: 10px;
       border-radius: var(--radius-md);
-      border: 1px solid rgba(251,191,36,0.30);
-      background:
-        radial-gradient(560px 200px at 20% 0%, rgba(251,191,36,0.14), transparent 55%),
-        linear-gradient(180deg, #ffffff 0%, #fffbeb 100%);
-      box-shadow: var(--shadow-1);
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.80);
     }
     .chip{
       padding: 9px 12px;
       border-radius: 999px;
       border: 1px solid rgba(2,6,23,0.12);
-      background: rgba(255,255,255,0.90);
+      background: rgba(255,255,255,0.92);
       box-shadow: 0 10px 20px rgba(0,0,0,0.06);
       cursor:pointer;
       transition: transform 0.18s ease, box-shadow 0.18s ease, border 0.18s ease, background 0.18s ease;
-      font-size: 11px;
+      font-size: 12px;
       font-weight: 950;
-      color: #0f172a;
+      color: var(--text);
       user-select:none;
       white-space: nowrap;
     }
@@ -361,7 +361,7 @@
       border-radius: var(--radius-sm);
       border: 1px solid var(--border-strong);
       background: #f8fafc;
-      font-size: 13px;
+      font-size: 14px;
       font-weight: 650;
       resize: vertical;
       transition: box-shadow 0.2s ease, border 0.2s ease, background 0.2s ease;
@@ -375,28 +375,38 @@
     .char-count{
       text-align:right;
       margin-top: 6px;
-      font-size: 11px;
+      font-size: 12px;
       color: #94a3b8;
-      font-weight: 800;
+      font-weight: 900;
+    }
+
+    .sticky-footer{
+      position: sticky;
+      bottom: 0;
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(8px);
+      border-top: 1px solid rgba(2,6,23,0.08);
+      padding: 10px 14px calc(10px + env(safe-area-inset-bottom));
     }
 
     .submit-btn{
       width:100%;
       padding: 16px 14px;
       border-radius: 16px;
-      background: radial-gradient(900px 260px at 20% 0%, rgba(255,255,255,0.16), transparent 55%),
-                  linear-gradient(135deg, var(--red) 0%, var(--red2) 100%);
+      background:
+        radial-gradient(900px 260px at 20% 0%, rgba(255,255,255,0.16), transparent 55%),
+        linear-gradient(135deg, var(--red) 0%, var(--red2) 100%);
       color:#fff;
       font-size: 16px;
       font-weight: 1000;
       letter-spacing: 0.2px;
       cursor:pointer;
-      box-shadow: 0 16px 34px rgba(220,38,38,0.30);
+      box-shadow: 0 16px 34px rgba(220,38,38,0.26);
       transition: transform 0.18s ease, box-shadow 0.18s ease, filter 0.18s ease;
     }
     .submit-btn:active{
       transform: translateY(1px);
-      box-shadow: 0 10px 22px rgba(220,38,38,0.28);
+      box-shadow: 0 10px 22px rgba(220,38,38,0.22);
       filter: saturate(1.05);
     }
     .submit-btn:disabled{
@@ -429,6 +439,51 @@
     .success-title{ font-size: 24px; font-weight: 1000; color: var(--text); margin-bottom: 6px; }
     .success-subtitle{ font-size: 14px; color: var(--muted); line-height: 1.45; margin-bottom: 14px; }
 
+    /* Suggested Review Box Styles (Updated) */
+    .suggested-review-box{
+      display:none; /* Hidden by default */
+      margin: 16px 0 24px;
+      background: #fff5f5; /* Light reddish pink */
+      border: 1px dashed #ef4444;
+      border-radius: var(--radius-lg);
+      padding: 14px 16px;
+      text-align: left;
+    }
+    .suggested-review-box.show{ display:block; }
+
+    .review-header{
+      display:flex;
+      justify-content: space-between;
+      align-items:center;
+      margin-bottom: 10px;
+    }
+    .review-label{
+      font-size: 11px;
+      font-weight: 900;
+      color: #dc2626;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .copy-btn{
+      background: #dc2626;
+      color: #fff;
+      border-radius: 6px;
+      font-size: 11px;
+      font-weight: 800;
+      padding: 4px 10px;
+      cursor:pointer;
+      transition: background 0.2s;
+    }
+    .copy-btn:active{ transform: scale(0.96); }
+
+    .review-text{
+      font-size: 14px;
+      font-style: italic;
+      color: var(--text);
+      line-height: 1.5;
+      font-weight: 600;
+    }
+
     .google-prompt{ display:none; margin-top: 10px; }
     .google-btn{
       display:inline-flex;
@@ -451,9 +506,9 @@
     .footer{
       text-align:center;
       padding: 12px;
-      color: rgba(255,255,255,0.92);
-      font-size: 11px;
-      line-height: 1.5;
+      color: #64748b;
+      font-size: 12px;
+      line-height: 1.45;
     }
   </style>
 </head>
@@ -469,153 +524,156 @@
     </div>
 
     <div class="content" id="formContent">
-      <div class="error-banner" id="errorBanner"></div>
+      <div class="error-banner" id="errorBanner" role="alert" aria-live="polite"></div>
 
-      <!-- Rating -->
       <div class="section" style="animation-delay:0.05s">
-        <div class="section-title">आजचा अनुभव कसा होता?</div>
+        <div class="section-title">आजचा अनुभव कसा होता? <span class="req-star" aria-hidden="true">*</span><span class="required-pill">आवश्यक / Required</span></div>
         <div class="section-subtitle">How was your experience?</div>
-        <div class="required-pill">* आवश्यक / Required</div>
 
-        <div class="emoji-container" id="emojiRating" style="margin-top:10px;">
-          <div class="emoji-wrapper">
-            <button class="emoji-btn" type="button" data-rating="1" aria-label="वाईट / Poor"><span>😞</span></button>
-            <div class="emoji-label">वाईट<br/>Poor</div>
-          </div>
-          <div class="emoji-wrapper">
-            <button class="emoji-btn" type="button" data-rating="2" aria-label="ठीकठाक / Fair"><span>😐</span></button>
-            <div class="emoji-label">ठीकठाक<br/>Fair</div>
-          </div>
-          <div class="emoji-wrapper">
-            <button class="emoji-btn" type="button" data-rating="3" aria-label="चांगलं / Good"><span>🙂</span></button>
-            <div class="emoji-label">चांगलं<br/>Good</div>
-          </div>
-          <div class="emoji-wrapper">
-            <button class="emoji-btn" type="button" data-rating="4" aria-label="खूप छान / Great"><span>😊</span></button>
-            <div class="emoji-label">खूप छान<br/>Great</div>
-          </div>
-          <div class="emoji-wrapper">
-            <button class="emoji-btn" type="button" data-rating="5" aria-label="उत्तम / Excellent"><span>🤩</span></button>
-            <div class="emoji-label">उत्तम<br/>Excellent</div>
+        <div class="panel" id="ratingPanel">
+          <div class="emoji-container" id="emojiRating">
+            <div class="emoji-wrapper">
+              <button class="emoji-btn" type="button" data-rating="1" aria-label="वाईट / Poor"><span>😞</span></button>
+              <div class="emoji-label">वाईट<br/>Poor</div>
+            </div>
+            <div class="emoji-wrapper">
+              <button class="emoji-btn" type="button" data-rating="2" aria-label="ठीकठाक / Fair"><span>😐</span></button>
+              <div class="emoji-label">ठीकठाक<br/>Fair</div>
+            </div>
+            <div class="emoji-wrapper">
+              <button class="emoji-btn" type="button" data-rating="3" aria-label="चांगलं / Good"><span>🙂</span></button>
+              <div class="emoji-label">चांगलं<br/>Good</div>
+            </div>
+            <div class="emoji-wrapper">
+              <button class="emoji-btn" type="button" data-rating="4" aria-label="खूप छान / Great"><span>😊</span></button>
+              <div class="emoji-label">खूप छान<br/>Great</div>
+            </div>
+            <div class="emoji-wrapper">
+              <button class="emoji-btn" type="button" data-rating="5" aria-label="उत्तम / Excellent"><span>🤩</span></button>
+              <div class="emoji-label">उत्तम<br/>Excellent</div>
+            </div>
           </div>
         </div>
       </div>
 
-      <!-- Order -->
       <div class="section" style="animation-delay:0.10s">
-        <div class="section-title">तुम्ही काय ऑर्डर केलं?</div>
+        <div class="section-title">तुम्ही काय ऑर्डर केलं? <span class="req-star" aria-hidden="true">*</span><span class="required-pill">आवश्यक / Required</span></div>
         <div class="section-subtitle">What did you order?</div>
-        <div class="required-pill">* आवश्यक / Required</div>
 
-        <div class="order-grid" style="margin-top:10px;">
-          <button class="order-card" type="button" data-order="dumplings" aria-label="डंपलिंग / Dumplings">
-            <div class="order-icon">🥟</div>
-            <div class="order-text">डंपलिंग</div>
-            <div class="order-subtext">Dumplings</div>
-          </button>
+        <div class="panel" id="orderPanel">
+          <div class="order-grid">
+            <button class="order-card" type="button" data-order="dumplings" aria-label="डंपलिंग / Dumplings">
+              <div class="order-icon">🥟</div>
+              <div class="order-text">डंपलिंग</div>
+              <div class="order-subtext">Dumplings</div>
+            </button>
 
-          <button class="order-card" type="button" data-order="fries" aria-label="फ्रेंच फ्राईज / French Fries">
-            <div class="order-icon">🍟</div>
-            <div class="order-text">फ्रेंच फ्राईज</div>
-            <div class="order-subtext">French Fries</div>
-          </button>
+            <button class="order-card" type="button" data-order="fries" aria-label="फ्रेंच फ्राईज / French Fries">
+              <div class="order-icon">🍟</div>
+              <div class="order-text">फ्रेंच फ्राईज</div>
+              <div class="order-subtext">French Fries</div>
+            </button>
 
-          <button class="order-card" type="button" data-order="other" aria-label="इतर / Other">
-            <div class="order-icon">🍽️</div>
-            <div class="order-text">इतर</div>
-            <div class="order-subtext">Other</div>
-          </button>
-        </div>
-
-        <div class="other-input-wrap" id="otherOrderWrap">
-          <input class="text-input" id="otherOrderText" type="text" maxlength="50"
-                 placeholder="इतर काय? (उदा. ड्रिंक) / What other item?" />
-        </div>
-
-        <!-- Dumpling details -->
-        <div class="expand-section" id="dumplingDetails">
-          <div style="margin-top:12px;">
-            <div class="label-strong">भराव निवडा (Filling) <span class="label-note">— एकच निवडा</span></div>
-            <div class="variant-grid" id="fillingGrid">
-              <button class="variant-btn" type="button" data-filling="veggies">🥬 वेज<br><span style="font-size:10px;font-weight:800;opacity:.9">Veg</span></button>
-              <button class="variant-btn" type="button" data-filling="paneer">🧀 पनीर<br><span style="font-size:10px;font-weight:800;opacity:.9">Paneer</span></button>
-              <button class="variant-btn" type="button" data-filling="corncheese">🌽 कॉर्न चीज<br><span style="font-size:10px;font-weight:800;opacity:.9">Corn Cheese</span></button>
-              <button class="variant-btn" type="button" data-filling="chicken">🍗 चिकन<br><span style="font-size:10px;font-weight:800;opacity:.9">Chicken</span></button>
-            </div>
+            <button class="order-card" type="button" data-order="other" aria-label="इतर / Other">
+              <div class="order-icon">🍽️</div>
+              <div class="order-text">इतर</div>
+              <div class="order-subtext">Other</div>
+            </button>
           </div>
 
-          <div class="expand-section" id="styleSection">
-            <div style="margin-top:12px;">
-              <div class="label-strong">स्टाईल/फ्लेवर निवडा (Style/Flavour) <span class="label-note">— एकच निवडा</span></div>
+          <div class="other-input-wrap" id="otherOrderWrap">
+            <label class="field-label" for="otherOrderText">इतर काय? / What other item?</label>
+            <input class="text-input" id="otherOrderText" type="text" maxlength="50"
+                   aria-label="इतर काय? / What other item?" placeholder="उदा. ड्रिंक / e.g. drink" />
+          </div>
+
+          <div class="expand-section" id="dumplingDetails">
+            <div class="label-strong">भराव निवडा (Filling) <span class="req-star" aria-hidden="true">*</span><span class="label-note">— एकच निवडा / Pick one</span></div>
+            <div class="variant-grid" id="fillingGrid">
+              <button class="variant-btn" type="button" data-filling="Veg" data-label="Veg">🥬 वेज<br><span style="font-size:10px;font-weight:800;opacity:.9">Veg</span></button>
+              <button class="variant-btn" type="button" data-filling="Paneer" data-label="Paneer">🧀 पनीर<br><span style="font-size:10px;font-weight:800;opacity:.9">Paneer</span></button>
+              <button class="variant-btn" type="button" data-filling="Corn Cheese" data-label="Corn Cheese">🌽 कॉर्न चीज<br><span style="font-size:10px;font-weight:800;opacity:.9">Corn Cheese</span></button>
+              <button class="variant-btn" type="button" data-filling="Chicken" data-label="Chicken">🍗 चिकन<br><span style="font-size:10px;font-weight:800;opacity:.9">Chicken</span></button>
+            </div>
+
+            <div class="expand-section" id="styleSection">
+              <div class="label-strong">स्टाईल/फ्लेवर निवडा (Style/Flavour) <span class="req-star" aria-hidden="true">*</span><span class="label-note">— एकच निवडा / Pick one</span></div>
               <div class="chip-grid" id="styleGrid">
-                <button class="chip" type="button" data-style="kimchi-special">Kimchi Special</button>
-                <button class="chip" type="button" data-style="steam">Steam</button>
-                <button class="chip" type="button" data-style="fried">Fried</button>
-                <button class="chip" type="button" data-style="schezwan">Schezwan</button>
-                <button class="chip" type="button" data-style="peri-peri">Peri-Peri</button>
-                <button class="chip" type="button" data-style="jhol">Jhol</button>
-                <button class="chip" type="button" data-style="malai">Malai</button>
-                <button class="chip" type="button" data-style="triple-cheese">Triple Cheese</button>
-                <button class="chip" type="button" data-style="kurkure">Kurkure</button>
-                <button class="chip" type="button" data-style="peri-peri-fried">Peri-Peri Fried</button>
+                <button class="chip" type="button" data-style="Kimchi Special" data-label="Kimchi Special">Kimchi Special</button>
+                <button class="chip" type="button" data-style="Steam" data-label="Steam">Steam</button>
+                <button class="chip" type="button" data-style="Fried" data-label="Fried">Fried</button>
+                <button class="chip" type="button" data-style="Schezwan" data-label="Schezwan">Schezwan</button>
+                <button class="chip" type="button" data-style="Peri-Peri" data-label="Peri-Peri">Peri-Peri</button>
+                <button class="chip" type="button" data-style="Jhol" data-label="Jhol">Jhol</button>
+                <button class="chip" type="button" data-style="Malai" data-label="Malai">Malai</button>
+                <button class="chip" type="button" data-style="Triple Cheese" data-label="Triple Cheese">Triple Cheese</button>
+                <button class="chip" type="button" data-style="Kurkure" data-label="Kurkure">Kurkure</button>
+                <button class="chip" type="button" data-style="Peri-Peri Fried" data-label="Peri-Peri Fried">Peri-Peri Fried</button>
               </div>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- Like most -->
-      <div class="section" style="animation-delay:0.14s">
-        <div class="section-title">सर्वात जास्त काय आवडलं? <span style="font-size:12px;color:#94a3b8;font-weight:900;">(ऐच्छिक)</span></div>
-        <div class="section-subtitle">What did you like the most? (Optional)</div>
+      <div class="section" id="improveSection" style="display:none; animation-delay:0.14s">
+        <div class="section-title">काय सुधारायला हवं? <span class="req-star" aria-hidden="true">*</span><span class="required-pill">आवश्यक / Required</span></div>
+        <div class="section-subtitle">What should we improve?</div>
 
-        <div class="chip-grid" id="likeMostGrid" style="border-color: rgba(99,102,241,0.25);
-          background: radial-gradient(560px 200px at 20% 0%, rgba(99,102,241,0.16), transparent 55%), linear-gradient(180deg,#ffffff 0%, #eef2ff 100%);">
-          <button class="chip" type="button" data-like="taste">चव / Taste</button>
-          <button class="chip" type="button" data-like="quantity">प्रमाण / Quantity</button>
-          <button class="chip" type="button" data-like="price">किंमत / Price</button>
-          <button class="chip" type="button" data-like="service">सर्व्हिस / Service</button>
-          <button class="chip" type="button" data-like="hygiene">स्वच्छता / Hygiene</button>
-          <button class="chip" type="button" data-like="packaging">पॅकेजिंग / Packaging</button>
+        <div class="panel" id="improvePanel">
+          <div class="chip-grid" id="improveGrid">
+            <button class="chip" type="button" data-improve="taste">चव / Taste</button>
+            <button class="chip" type="button" data-improve="spice">तिखट / Spice</button>
+            <button class="chip" type="button" data-improve="wait">वेटिंग / Wait</button>
+            <button class="chip" type="button" data-improve="staff">स्टाफ / Staff</button>
+            <button class="chip" type="button" data-improve="cleanliness">स्वच्छता / Cleanliness</button>
+            <button class="chip" type="button" data-improve="price">किंमत / Price</button>
+            <button class="chip" type="button" data-improve="other">इतर / Other</button>
+          </div>
+
+          <div class="other-input-wrap" id="improveOtherWrap">
+            <label class="field-label" for="improveOtherText">इतर काय? / What else should we improve?</label>
+            <input class="text-input" id="improveOtherText" type="text" maxlength="60"
+                   aria-label="इतर काय? / What else should we improve?" placeholder="1–2 शब्द / 1–2 words" />
+          </div>
         </div>
       </div>
 
-      <!-- Improve (only for 1-3 rating) -->
-      <div class="section" id="improveSection" style="display:none; animation-delay:0.16s">
-        <div class="section-title">काय सुधारायला हवं? <span style="font-size:12px;color:#94a3b8;font-weight:900;">(ऐच्छिक)</span></div>
-        <div class="section-subtitle">What should we improve? (Optional)</div>
+      <div class="section" style="animation-delay:0.16s">
+        <div class="section-title">सर्वात जास्त काय आवडलं? <span class="req-star" aria-hidden="true">*</span><span class="required-pill">आवश्यक / Required</span></div>
+        <div class="section-subtitle">What did you like the most?</div>
 
-        <div class="chip-grid" id="improveGrid" style="border-color: rgba(244,63,94,0.25);
-          background: radial-gradient(560px 200px at 20% 0%, rgba(244,63,94,0.16), transparent 55%), linear-gradient(180deg,#ffffff 0%, #fff1f2 100%);">
-          <button class="chip" type="button" data-improve="taste">चव / Taste</button>
-          <button class="chip" type="button" data-improve="spice">तिखट / Spice</button>
-          <button class="chip" type="button" data-improve="wait">वेटिंग / Wait</button>
-          <button class="chip" type="button" data-improve="staff">स्टाफ / Staff</button>
-          <button class="chip" type="button" data-improve="cleanliness">स्वच्छता / Cleanliness</button>
-          <button class="chip" type="button" data-improve="price">किंमत / Price</button>
-          <button class="chip" type="button" data-improve="other">इतर / Other</button>
-        </div>
-
-        <div class="other-input-wrap" id="improveOtherWrap">
-          <input class="text-input" id="improveOtherText" type="text" maxlength="60"
-                 placeholder="इतर काय? / What else should we improve?" />
+        <div class="panel" id="likeMostPanel">
+          <div class="chip-grid" id="likeMostGrid">
+            <button class="chip" type="button" data-like="taste">चव / Taste</button>
+            <button class="chip" type="button" data-like="quantity">प्रमाण / Quantity</button>
+            <button class="chip" type="button" data-like="price">किंमत / Price</button>
+            <button class="chip" type="button" data-like="service">सर्व्हिस / Service</button>
+            <button class="chip" type="button" data-like="hygiene">स्वच्छता / Hygiene</button>
+            <button class="chip" type="button" data-like="packaging">पॅकेजिंग / Packaging</button>
+            <button class="chip" type="button" data-like="none">काही नाही / Nothing</button>
+          </div>
         </div>
       </div>
 
-      <!-- Feedback -->
-      <div class="section" style="animation-delay:0.20s">
-        <div class="section-title">अभिप्राय <span style="font-size:12px;color:#94a3b8;font-weight:900;">(ऐच्छिक)</span></div>
-        <div class="section-subtitle">Your feedback (Optional)</div>
+      <div class="section" style="animation-delay:0.18s">
+        <div class="section-title">अभिप्राय</div>
+        <div class="section-subtitle">Any details? (Optional)</div>
 
-        <textarea class="feedback-box" id="feedback" maxlength="200"
-          placeholder="चव, प्रमाण, मसाला, वेटिंग... काहीही लिहा.&#10;Taste, quantity, spice, waiting... write anything."></textarea>
-        <div class="char-count"><span id="charCount">0</span>/200</div>
+        <div class="panel">
+          <textarea class="feedback-box" id="feedback" maxlength="200"
+            aria-label="अभिप्राय / Feedback"
+            placeholder="चव, प्रमाण, मसाला, वेटिंग... काहीही लिहा.
+Taste, quantity, spice, waiting... write anything."></textarea>
+          <div class="char-count"><span id="charCount">0</span>/200</div>
+        </div>
       </div>
 
+    </div>
+
+    <div class="sticky-footer" id="stickyFooter">
       <button class="submit-btn" id="submitBtn" disabled>सबमिट करा ✨ / Submit</button>
     </div>
 
-    <!-- Success Screen -->
     <div class="success-screen" id="successScreen">
       <div class="success-icon">🎉</div>
       <div class="success-title">धन्यवाद!</div>
@@ -623,11 +681,20 @@
         तुमचा अभिप्राय आम्हाला सुधारायला मदत करतो.<br/>Your feedback helps us improve.
       </div>
 
-      <!-- Only shown if rating is 4 or 5 -->
+      <div class="suggested-review-box" id="suggestedReviewBox">
+        <div class="review-header">
+          <div class="review-label">✨ Suggested Review</div>
+          <button class="copy-btn" id="copyReviewBtn">COPY</button>
+        </div>
+        <div class="review-text" id="reviewText">
+          Loading review...
+        </div>
+      </div>
+
       <div class="google-prompt" id="googlePrompt">
         <div class="success-subtitle" style="margin-bottom:12px;">
           आवडलं असेल तर Google वर 1 मिनिटात रिव्ह्यू द्या 🙌<br/>
-          Leave a quick Google review 🙌
+          Share this on Google in 1 minute 🙌
         </div>
 
         <a class="google-btn" id="googleReviewBtn" target="_blank" rel="noopener">
@@ -646,13 +713,11 @@
   </div>
 
   <script>
-    // ✅ Integrated links
+    // Links
     const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycby52ne8pDN4m-fZyqD3zqlW13veShYEzRvj4xQUvhGekQUFCWMd4uFC-STOL8G9zKCW/exec';
-    // 'https://script.google.com/macros/s/AKfycbw_ja5MEwQPdpynDr0onrNSnrcpZl7Er7EjP_Gqk2RfvsQ8v3QjVaVzt9V02qQTDE5d/exec';
     const GOOGLE_REVIEW_URL = 'https://search.google.com/local/writereview?placeid=ChIJz5u4c3HV0jsRhC7ZVhO4ID8';
     const DRIVE_FILE_ID = '1FCHvdR0SQKH-B7bgNuYg3wXsN4LzbC89';
 
-    // Drive "view" links don't load as images reliably. Use direct:
     const LOGO_URL_PRIMARY = `https://lh3.googleusercontent.com/d/${DRIVE_FILE_ID}`;
     const LOGO_URL_FALLBACK = `https://drive.google.com/uc?export=view&id=${DRIVE_FILE_ID}`;
 
@@ -660,19 +725,31 @@
       rating: 0,
       orders: [],
       otherOrderText: '',
-      dumplingFilling: '',
-      dumplingStyle: '',
-      likeMost: '',
-      improveNeed: '',
+      dumplingFilling: '', // Holds data-filling value
+      dumplingStyle: '',   // Holds data-style value
+      dumplingFillingLabel: '', // Holds display label
+      dumplingStyleLabel: '',   // Holds display label
+      likeMost: [],
+      improveNeed: [],
       improveOtherText: '',
       feedback: '',
-      source: 'kimchi-cloud-feedback',
-      userAgent: navigator.userAgent
+      source: 'kimchi-cloud-feedback-v3',
+      userAgent: navigator.userAgent,
+      submissionId: ''
     };
 
     const $ = (id) => document.getElementById(id);
 
-    // Set logo + fallback
+    // Submission ID (for de-duplication on backend if needed)
+    function genId(){
+      try{
+        if (crypto && crypto.randomUUID) return crypto.randomUUID();
+      }catch(e){}
+      return 'sub_' + Math.random().toString(16).slice(2) + '_' + Date.now();
+    }
+    formData.submissionId = genId();
+
+    // Logo
     const logoImg = $('logoImg');
     logoImg.src = LOGO_URL_PRIMARY;
     logoImg.onerror = function () {
@@ -683,7 +760,6 @@
       }
     };
 
-    // Set Google review link
     $('googleReviewBtn').href = GOOGLE_REVIEW_URL;
 
     const errorBanner = $('errorBanner');
@@ -697,49 +773,20 @@
       errorBanner.classList.remove('show');
     }
 
-    const submitBtn = $('submitBtn');
-    function updateSubmitState(){
-      submitBtn.disabled = !(formData.rating > 0 && formData.orders.length > 0);
+    function clearPanelErrors(){
+      ['ratingPanel','orderPanel','improvePanel','likeMostPanel'].forEach(id=>{
+        const el = $(id);
+        if (el) el.classList.remove('error');
+      });
     }
 
-    // Rating
-    const emojiBtns = document.querySelectorAll('.emoji-btn');
-    emojiBtns.forEach(btn => {
-      btn.addEventListener('click', () => {
-        clearError();
-        const rating = parseInt(btn.dataset.rating, 10);
-        formData.rating = rating;
-
-        document.querySelectorAll('.emoji-wrapper').forEach(w => w.classList.remove('active-wrapper'));
-        btn.closest('.emoji-wrapper')?.classList.add('active-wrapper');
-
-        // Improve section only for 1-3
-        const improveSection = $('improveSection');
-        if (rating <= 3) {
-          improveSection.style.display = 'block';
-        } else {
-          improveSection.style.display = 'none';
-          formData.improveNeed = '';
-          formData.improveOtherText = '';
-          $('improveOtherWrap').classList.remove('show');
-          $('improveOtherText').value = '';
-          document.querySelectorAll('#improveGrid .chip').forEach(c => c.classList.remove('selected'));
-        }
-
-        updateSubmitState();
-      });
-    });
-
-    // Orders (multi-select)
-    const orderCards = document.querySelectorAll('.order-card');
-    const dumplingDetails = $('dumplingDetails');
-    const styleSection = $('styleSection');
-    const otherOrderWrap = $('otherOrderWrap');
-    const otherOrderText = $('otherOrderText');
+    const submitBtn = $('submitBtn');
 
     function isSelectedOrder(order){ return formData.orders.includes(order); }
 
     function syncDumplingVisibility(){
+      const dumplingDetails = $('dumplingDetails');
+      const styleSection = $('styleSection');
       if (isSelectedOrder('dumplings')) {
         dumplingDetails.classList.add('show');
       } else {
@@ -747,12 +794,16 @@
         styleSection.classList.remove('show');
         formData.dumplingFilling = '';
         formData.dumplingStyle = '';
+        formData.dumplingFillingLabel = '';
+        formData.dumplingStyleLabel = '';
         document.querySelectorAll('.variant-btn').forEach(b => b.classList.remove('selected'));
         document.querySelectorAll('#styleGrid .chip').forEach(b => b.classList.remove('selected'));
       }
     }
 
     function syncOtherVisibility(){
+      const otherOrderWrap = $('otherOrderWrap');
+      const otherOrderText = $('otherOrderText');
       if (isSelectedOrder('other')) {
         otherOrderWrap.classList.add('show');
       } else {
@@ -762,7 +813,89 @@
       }
     }
 
-    orderCards.forEach(card => {
+    function syncImproveVisibility(){
+      const improveSection = $('improveSection');
+      if (formData.rating > 0 && formData.rating <= 3) {
+        improveSection.style.display = 'block';
+      } else {
+        improveSection.style.display = 'none';
+        formData.improveNeed = [];
+        formData.improveOtherText = '';
+        $('improveOtherWrap').classList.remove('show');
+        $('improveOtherText').value = '';
+        document.querySelectorAll('#improveGrid .chip').forEach(c => c.classList.remove('selected'));
+      }
+    }
+
+    function validate(showUI){
+      clearPanelErrors();
+
+      if (formData.rating === 0){
+        if (showUI) $('ratingPanel').classList.add('error');
+        return 'कृपया रेटिंग द्या. / Please select a rating.';
+      }
+
+      if (formData.orders.length === 0){
+        if (showUI) $('orderPanel').classList.add('error');
+        return 'कृपया तुम्ही काय ऑर्डर केलं ते निवडा. / Please select what you ordered.';
+      }
+
+      if (isSelectedOrder('other') && formData.otherOrderText.trim().length === 0){
+        if (showUI) $('orderPanel').classList.add('error');
+        return 'कृपया "इतर" मध्ये काय घेतलं ते लिहा. / Please enter the other item.';
+      }
+
+      if (isSelectedOrder('dumplings')){
+        if (!formData.dumplingFilling){
+          if (showUI) $('orderPanel').classList.add('error');
+          return 'कृपया डंपलिंगचा भराव निवडा. / Please select dumpling filling.';
+        }
+        if (!formData.dumplingStyle){
+          if (showUI) $('orderPanel').classList.add('error');
+          return 'कृपया डंपलिंगचा स्टाईल/फ्लेवर निवडा. / Please select dumpling style.';
+        }
+      }
+
+      if (formData.rating <= 3){
+        if (!formData.improveNeed || formData.improveNeed.length === 0){
+          if (showUI) $('improvePanel').classList.add('error');
+          return 'कृपया काय सुधारायला हवं ते निवडा. / Please select what we should improve.';
+        }
+        if (formData.improveNeed.includes('other') && formData.improveOtherText.trim().length === 0){
+          if (showUI) $('improvePanel').classList.add('error');
+          return 'कृपया "इतर" मध्ये सुधारणा काय ते लिहा. / Please enter what else we should improve.';
+        }
+      }
+
+      if (!formData.likeMost || formData.likeMost.length === 0){
+        if (showUI) $('likeMostPanel').classList.add('error');
+        return 'कृपया सर्वात जास्त काय आवडलं ते निवडा. / Please select what you liked the most.';
+      }
+
+      return null;
+    }
+
+    function updateSubmitState(){
+      submitBtn.disabled = !!validate(false);
+    }
+
+    // Rating
+    document.querySelectorAll('.emoji-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        clearError();
+        const rating = parseInt(btn.dataset.rating, 10);
+        formData.rating = rating;
+
+        document.querySelectorAll('.emoji-wrapper').forEach(w => w.classList.remove('active-wrapper'));
+        btn.closest('.emoji-wrapper')?.classList.add('active-wrapper');
+
+        syncImproveVisibility();
+        updateSubmitState();
+      });
+    });
+
+    // Orders
+    document.querySelectorAll('.order-card').forEach(card => {
       card.addEventListener('click', () => {
         clearError();
         const order = card.dataset.order;
@@ -781,11 +914,12 @@
       });
     });
 
-    otherOrderText.addEventListener('input', () => {
-      formData.otherOrderText = otherOrderText.value.trim();
+    $('otherOrderText').addEventListener('input', () => {
+      formData.otherOrderText = $('otherOrderText').value.trim();
+      updateSubmitState();
     });
 
-    // Filling (single select)
+    // Filling
     const fillingBtns = document.querySelectorAll('.variant-btn');
     fillingBtns.forEach(btn => {
       btn.addEventListener('click', () => {
@@ -793,53 +927,104 @@
         fillingBtns.forEach(b => b.classList.remove('selected'));
         btn.classList.add('selected');
         formData.dumplingFilling = btn.dataset.filling;
-        setTimeout(() => styleSection.classList.add('show'), 80);
+        formData.dumplingFillingLabel = btn.dataset.label;
+        setTimeout(() => $('styleSection').classList.add('show'), 60);
+        updateSubmitState();
       });
     });
 
-    // Style (single select)
+    // Style
     const styleChips = document.querySelectorAll('#styleGrid .chip');
     styleChips.forEach(chip => {
       chip.addEventListener('click', () => {
+        clearError();
         styleChips.forEach(c => c.classList.remove('selected'));
         chip.classList.add('selected');
         formData.dumplingStyle = chip.dataset.style;
+        formData.dumplingStyleLabel = chip.dataset.label;
+        updateSubmitState();
       });
     });
 
-    // Like most (single select)
+    // Like most
     const likeMostChips = document.querySelectorAll('#likeMostGrid .chip');
+    function setLikeMostSelection(){
+      const selected = Array.from(likeMostChips)
+        .filter(c => c.classList.contains('selected'))
+        .map(c => c.dataset.like);
+      formData.likeMost = selected;
+    }
+
+    function clearAllLikeMost(){
+      likeMostChips.forEach(c => c.classList.remove('selected'));
+      formData.likeMost = [];
+    }
+
     likeMostChips.forEach(chip => {
       chip.addEventListener('click', () => {
-        likeMostChips.forEach(c => c.classList.remove('selected'));
-        chip.classList.add('selected');
-        formData.likeMost = chip.dataset.like;
+        clearError();
+        const key = chip.dataset.like;
+
+        if (key === 'none') {
+          const turningOn = !chip.classList.contains('selected');
+          clearAllLikeMost();
+          if (turningOn) chip.classList.add('selected');
+          setLikeMostSelection();
+          updateSubmitState();
+          return;
+        }
+
+        likeMostChips.forEach(c => {
+          if (c.dataset.like === 'none') c.classList.remove('selected');
+        });
+
+        if (chip.classList.contains('selected')) {
+          chip.classList.remove('selected');
+        } else {
+          chip.classList.add('selected');
+        }
+
+        setLikeMostSelection();
+        updateSubmitState();
       });
     });
 
-    // Improve (single select + other text)
+    // Improve
     const improveChips = document.querySelectorAll('#improveGrid .chip');
     const improveOtherWrap = $('improveOtherWrap');
     const improveOtherText = $('improveOtherText');
 
+    function syncImproveOtherVisibility(){
+      if (formData.improveNeed.includes('other')) {
+        improveOtherWrap.classList.add('show');
+      } else {
+        improveOtherWrap.classList.remove('show');
+        formData.improveOtherText = '';
+        improveOtherText.value = '';
+      }
+    }
+
     improveChips.forEach(chip => {
       chip.addEventListener('click', () => {
-        improveChips.forEach(c => c.classList.remove('selected'));
-        chip.classList.add('selected');
-        formData.improveNeed = chip.dataset.improve;
+        clearError();
+        const key = chip.dataset.improve;
 
-        if (formData.improveNeed === 'other') {
-          improveOtherWrap.classList.add('show');
+        if (chip.classList.contains('selected')) {
+          chip.classList.remove('selected');
+          formData.improveNeed = formData.improveNeed.filter(x => x !== key);
         } else {
-          improveOtherWrap.classList.remove('show');
-          formData.improveOtherText = '';
-          improveOtherText.value = '';
+          chip.classList.add('selected');
+          formData.improveNeed.push(key);
         }
+
+        syncImproveOtherVisibility();
+        updateSubmitState();
       });
     });
 
     improveOtherText.addEventListener('input', () => {
       formData.improveOtherText = improveOtherText.value.trim();
+      updateSubmitState();
     });
 
     // Feedback
@@ -850,121 +1035,172 @@
       charCount.textContent = feedbackBox.value.length;
     });
 
+    // -----------------------------------------------------
+    // SMART REVIEW GENERATION LOGIC (Natural & Varied)
+    // -----------------------------------------------------
+    function generateSmartReview() {
+      // Arrays for randomization to avoid sameness
+      const adjectives = ['Amazing', 'Great', 'Superb', 'Fantastic', 'Delicious', 'Really good'];
+      const openings = ['Had a great time.', 'Just visited Kimchi Cloud.', 'Great food spot!', 'Loved the food here.'];
+      const closings = ['Highly recommended! ✨', 'Will visit again.', 'Definitely worth a try!', 'Do give it a try.'];
+
+      const getRandom = (arr) => arr[Math.floor(Math.random() * arr.length)];
+
+      let parts = [];
+
+      // 1. Food Mention
+      let foodItem = '';
+      if (isSelectedOrder('dumplings') && formData.dumplingFillingLabel && formData.dumplingStyleLabel) {
+        foodItem = `${formData.dumplingFillingLabel} ${formData.dumplingStyleLabel} Momos`;
+      } else if (isSelectedOrder('fries')) {
+        foodItem = 'French Fries';
+      } else {
+        foodItem = 'food';
+      }
+
+      // 2. Build the main sentence based on "Like Most" tags
+      const likes = formData.likeMost || [];
+
+      // Template Logic
+      if (likes.includes('taste')) {
+         parts.push(`${getRandom(adjectives)} taste! Really loved the ${foodItem}.`);
+      } else if (likes.includes('price')) {
+         parts.push(`Great value for money. The ${foodItem} was tasty too.`);
+      } else if (likes.includes('service')) {
+         parts.push(`Service was quick and polite. Enjoyed the ${foodItem}.`);
+      } else {
+         // Generic if no specific tags like taste/price/service
+         parts.push(`Really liked the ${foodItem} here.`);
+      }
+
+      // 3. Add a secondary sentence if they selected multiple things
+      if (likes.includes('hygiene') || likes.includes('packaging')) {
+        parts.push('Hygiene and packaging are top notch.');
+      } else if (likes.includes('quantity')) {
+        parts.push('Quantity was also good.');
+      }
+
+      // 4. Combine
+      // Randomize structure: sometimes Start + Main, sometimes Main + End
+      const useOpening = Math.random() > 0.5;
+      let finalReview = '';
+
+      if (useOpening) {
+        finalReview = `${getRandom(openings)} ${parts.join(' ')}`;
+      } else {
+        finalReview = `${parts.join(' ')} ${getRandom(closings)}`;
+      }
+
+      return finalReview;
+    }
+
+    // -----------------------------------------------------
+    // SUCCESS & SUBMIT HANDLERS
+    // -----------------------------------------------------
+
     function showSuccess(){
       $('formContent').style.display = 'none';
+      const footer = $('stickyFooter');
+      if (footer) footer.style.display = 'none';
+
       $('successScreen').classList.add('show');
 
       const rating = formData.rating;
       const googlePrompt = $('googlePrompt');
+      const suggestedBox = $('suggestedReviewBox');
+      const reviewTextEl = $('reviewText');
       const successMsg = $('successMsg');
 
-      // Google prompt ONLY here for 4-5
       if (rating >= 4) {
+        // Show Google prompt
         googlePrompt.style.display = 'block';
         successMsg.innerHTML = 'तुमचा अभिप्राय आम्हाला सुधारायला मदत करतो.<br/>Your feedback helps us improve.';
+
+        // Generate and show review text
+        const generatedText = generateSmartReview();
+        reviewTextEl.textContent = generatedText;
+        suggestedBox.classList.add('show');
+
       } else {
+        // Low rating: Don't show review prompt, just thank them
         googlePrompt.style.display = 'none';
+        suggestedBox.classList.remove('show');
         successMsg.innerHTML = 'धन्यवाद! आम्ही नक्की सुधारू 🙏<br/>Thanks — we’ll improve 🙏';
       }
     }
 
-async function submitToAppsScript(payload) {
-  const json = JSON.stringify(payload);
+    // Copy to Clipboard Functionality
+    const copyBtn = $('copyReviewBtn');
+    copyBtn.addEventListener('click', async () => {
+      const text = $('reviewText').textContent;
+      try {
+        await navigator.clipboard.writeText(text);
+        const originalText = copyBtn.textContent;
+        copyBtn.textContent = 'COPIED!';
+        copyBtn.style.background = '#059669'; // Green color indicating success
+        setTimeout(() => {
+          copyBtn.textContent = originalText;
+          copyBtn.style.background = '#dc2626'; // Reset to red
+        }, 2000);
+      } catch (err) {
+        console.error('Failed to copy', err);
+      }
+    });
 
-  // 1) Best-effort: sendBeacon (very reliable on mobile QR flows)
-  try {
-    if (navigator.sendBeacon) {
-      const blob = new Blob([json], { type: 'text/plain;charset=utf-8' });
-      const queued = navigator.sendBeacon(SCRIPT_URL, blob);
-      if (queued) return { success: true, method: 'beacon' };
-      // if queued=false, fall back to fetch
+    async function submitToAppsScript(payload) {
+      const json = JSON.stringify(payload);
+      try {
+        if (navigator.sendBeacon) {
+          const blob = new Blob([json], { type: 'text/plain;charset=utf-8' });
+          const queued = navigator.sendBeacon(SCRIPT_URL, blob);
+          if (queued) return { success: true, method: 'beacon' };
+        }
+      } catch (e) {}
+      await fetch(SCRIPT_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        keepalive: true,
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        body: json
+      });
+      return { success: true, method: 'fetch' };
     }
-  } catch (e) {
-    // fall back to fetch
-  }
 
-  // 2) Fallback: fetch no-cors
-  await fetch(SCRIPT_URL, {
-    method: 'POST',
-    mode: 'no-cors',
-    keepalive: true,
-    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-    body: json
-  });
+    submitBtn.addEventListener('click', async () => {
+      clearError();
 
-  return { success: true, method: 'fetch' };
-}
+      const err = validate(true);
+      if (err){
+        showError(err);
+        updateSubmitState();
+        return;
+      }
 
-submitBtn.addEventListener('click', async () => {
-  clearError();
+      submitBtn.disabled = true;
+      const originalText = submitBtn.textContent;
+      submitBtn.innerHTML = '<span class="loader"></span>';
 
-  if (formData.rating === 0) {
-    showError('कृपया रेटिंग द्या. / Please select a rating.');
-    return;
-  }
-  if (formData.orders.length === 0) {
-    showError('कृपया तुम्ही काय ऑर्डर केलं ते निवडा. / Please select what you ordered.');
-    return;
-  }
+      formData.submissionId = formData.submissionId || genId();
 
-  submitBtn.disabled = true;
-  const originalText = submitBtn.textContent;
-  submitBtn.innerHTML = '<span class="loader"></span>';
+      const payload = { ...formData,
+        likeMostCsv: Array.isArray(formData.likeMost) ? formData.likeMost.join('|') : String(formData.likeMost||''),
+        improveNeedCsv: Array.isArray(formData.improveNeed) ? formData.improveNeed.join('|') : String(formData.improveNeed||''),
+        submittedAtISO: new Date().toISOString() };
 
-  const payload = { ...formData, submittedAtISO: new Date().toISOString() };
+      try {
+        await submitToAppsScript(payload);
+        submitBtn.textContent = 'सबमिट करा ✨ / Submit';
+        showSuccess();
+      } catch (err) {
+        console.error(err);
+        submitBtn.disabled = false;
+        submitBtn.textContent = originalText;
+        showError('नेटवर्क/सर्व्हर समस्या. कृपया पुन्हा प्रयत्न करा. / Network issue — please try again.');
+      }
+    });
 
-  try {
-    await submitToAppsScript(payload);
-    showSuccess();
-  } catch (err) {
-    console.error(err);
-    submitBtn.disabled = false;
-    submitBtn.textContent = originalText;
-    showError('नेटवर्क/सर्व्हर समस्या. कृपया पुन्हा प्रयत्न करा. / Network issue — please try again.');
-  }
-});
-
-    // async function submitNoCors(payload){
-    //   // Important: no-cors allows only "simple" Content-Types; use text/plain
-    //   await fetch(SCRIPT_URL, {
-    //     method: 'POST',
-    //     mode: 'no-cors',
-    //     headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-    //     body: JSON.stringify(payload)
-    //   });
-    //   // If fetch doesn't throw, we treat as submitted (can't read response in no-cors)
-    //   return { success: true };
-    // }
-
-    // submitBtn.addEventListener('click', async () => {
-    //   clearError();
-
-    //   if (formData.rating === 0) {
-    //     showError('कृपया रेटिंग द्या. / Please select a rating.');
-    //     return;
-    //   }
-    //   if (formData.orders.length === 0) {
-    //     showError('कृपया तुम्ही काय ऑर्डर केलं ते निवडा. / Please select what you ordered.');
-    //     return;
-    //   }
-
-    //   submitBtn.disabled = true;
-    //   const originalText = submitBtn.textContent;
-    //   submitBtn.innerHTML = '<span class="loader"></span>';
-
-    //   const payload = { ...formData, submittedAtISO: new Date().toISOString() };
-
-    //   try {
-    //     await submitNoCors(payload);
-    //     showSuccess();
-    //   } catch (err) {
-    //     console.error(err);
-    //     submitBtn.disabled = false;
-    //     submitBtn.textContent = originalText;
-    //     showError('नेटवर्क/सर्व्हर समस्या. कृपया पुन्हा प्रयत्न करा. / Network issue — please try again.');
-    //   }
-    // });
-
+    // Initial state
+    syncImproveVisibility();
     updateSubmitState();
   </script>
 </body>
